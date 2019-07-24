@@ -96,7 +96,7 @@ bupropion
 tamsulosin
 none
 
-potassium chloride
+potassium
 lisinopril, cyclobenzaprine, losartan
 
 clopidogrel
