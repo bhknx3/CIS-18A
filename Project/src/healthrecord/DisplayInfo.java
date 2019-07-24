@@ -1,5 +1,5 @@
 package healthrecord;
 
-public interface DisplayInfo {
+interface DisplayInfo {
     void showInfo();
 }

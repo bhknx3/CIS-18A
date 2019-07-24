@@ -2,9 +2,10 @@ package healthrecord;
 
 // Person class
 class Person {
-    protected String fName;
-    protected String lName;
+    protected String fName; // First name
+    protected String lName; // Last name
 
+    // Constructor
     Person(String f, String l) {
         fName = f;
         lName = l;
@@ -14,12 +15,16 @@ class Person {
     public void printName() {
         System.out.println(fName + " " + lName);
     }
+
+    public String getName() {
+        return fName + " " + lName;
+    }
 }
 
 // Patient class
 public class Patient extends Person implements DisplayInfo {
-    private Drug[] prescriptions;
-    private Boolean warning;
+    private Drug[] prescriptions;   // List of prescriptions patient is taking
+    private Boolean warning;        // Major interaction between prescriptions
 
     // Constructor: Takes first and last name
     public Patient(String f, String l) {
@@ -56,7 +61,7 @@ public class Patient extends Person implements DisplayInfo {
             System.out.println("None");
         } else {
             // Else print prescription list separated by commas
-            for(int i = 0; i < prescriptions.length - 1; i++) {
+            for(int i=0; i < prescriptions.length-1; i++) {
                 System.out.print(prescriptions[i].getName() + ", ");
             }
             System.out.println(prescriptions[prescriptions.length-1].getName());
@@ -65,26 +70,59 @@ public class Patient extends Person implements DisplayInfo {
 
     // Print interaction warning
     void printWarning() {
+        // Check for interactions
         if(prescriptions != null)
             checkInteraction();
 
+        // Output interaction warning if toggled on
         if(warning)
-            System.out.println("WARNING: Major interaction detected");
+            System.out.println("WARNING - Major interaction detected");
         else
             System.out.println("None detected");
     }
 
+    // Check patient's prescription list for interactions
     public void checkInteraction() {
         for(int i=0; i<prescriptions.length; i++) {
             for(int j=0; j<prescriptions[i].getInteractionsSize(); j++) {
                 for(int k=0; k<prescriptions.length; k++) {
                     if( prescriptions[i].getInteraction(j).equals(prescriptions[k].getName()) ) {
-                        warning = true;
+                        warning = true; // Major interaction found
                         return;
                     }
                 }
             }
         }
-        warning = false;
+        warning = false;    // No major interaction found
+    }
+
+    // Add a prescription
+    public void addPrescription(Drug d) {
+        Drug newArray[] = new Drug[prescriptions.length+1];
+        for(int i=0; i<prescriptions.length; i++) {
+            newArray[i] = prescriptions[i];
+        }
+        newArray[newArray.length-1] = d;
+        prescriptions = newArray;
+    }
+
+    // Return array of prescriptions
+    public Drug[] getPrescription() {
+        return prescriptions;
+    }
+
+    // Delete a prescription from array, parameter: array element number
+    public void deletePrescription(int n) {
+        n -= 1; // Get correct corresponding element number
+
+        Drug newArray[] = new Drug[prescriptions.length-1];
+        for (int i=0; i<n; i++) {
+            newArray[i] = prescriptions[i];
+        }
+        for (int i=n; i<newArray.length; i++) {
+            newArray[i] = prescriptions[i+1];
+        }
+
+        prescriptions = newArray;
     }
 }

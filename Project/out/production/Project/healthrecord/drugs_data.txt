@@ -1,0 +1,151 @@
+50
+
+levothyroxine
+none
+
+lisinopril
+potassium, losartan
+
+atorvastatin
+none
+
+metformin
+none
+
+amlodipine
+simvastatin
+
+metoprolol
+none
+
+omeprazole
+clopidogrel, citalopram
+
+simvastatin
+amlodipine
+
+losartan
+potassium, lisinopril
+
+albuterol
+propranolol, carvedilol
+
+gabapentin
+none
+
+hydrochlorothiazide
+none
+
+hydrocodone
+alprazolam, bupropion, clonazepam, zolpidem, cyclobenzaprine, tramadol
+
+sertraline
+bupropion, trazodone, dextroamphetamine, cyclobenzaprine, tramadol, citalopram, escitalopram, duloxetine
+
+furosemide
+none
+
+fluticasone
+none
+
+acetaminophen
+none
+
+amoxicillin
+none
+
+alprazolam
+hydrocodone, tramadol, 
+
+atenolol
+none
+
+citalopram
+azithromycin, bupropion, fluoxetine, omeprazole, trazodone, dextroamphetamine, sertraline, cyclobenzaprine, tramadol, escitalopram, duloxetine
+
+insulin glargine
+none
+
+montelukast
+none
+
+trazodone
+bupropion, fluoxetine, sertraline, cyclobenzaprine, tramadol, citalopram, escitalopram, duloxetine
+
+pantoprazole
+none
+
+escitalopram
+azithromycin, bupropion, fluoxetine, trazodone, dextroamphetamine, sertraline, cyclobenzaprine, tramadol, citalopram, duloxetine
+
+pravastatin
+none
+
+bupropion
+fluoxetine, prednisone, trazodone, dextroamphetamine, sertraline, methylphenidate, cyclobenzaprine, hydrocodone, tramadol, citalopram, escitalopram, duloxetine
+
+fluoxetine
+bupropion, trazodone, dextroamphetamine, cyclobenzaprine, tramadol, clopidogrel, citalopram, escitalopram, duloxetine
+
+carvedilol
+albuterol
+
+prednisone
+bupropion
+
+tamsulosin
+none
+
+potassium chloride
+lisinopril, cyclobenzaprine, losartan
+
+clopidogrel
+warfarin, fluoxetine, omeprazole
+
+ibuprofen
+warfarin, aspirin 
+
+meloxicam
+warfarin
+
+rosuvastatin
+none
+
+aspirin
+ibuprofen, warfarin
+
+tramadol
+alprazolam, bupropion, clonazepam, fluoxetine, trazodone, dextroamphetamine, sertraline, methylphenidate, zolpidem, cyclobenzaprine, hydrocodone, citalopram, escitalopram, duloxetine
+
+zolpidem
+hydrocodone, tramadol
+
+warfarin
+ibuprofen, aspirin, clopidogrel, meloxicam
+
+clonazepam
+hydrocodone, tramadol
+
+propranolol
+albuterol
+
+glipizide
+none
+
+dextroamphetamine
+bupropion, fluoxetine, sertraline, tramadol, citalopram, escitalopram, duloxetine
+
+cyclobenzaprine
+bupropion, fluoxetine, potassium, trazodone, sertraline, hydrocodone, tramadol, citalopram, escitalopram, duloxetine
+
+methylphenidate
+bupropion, tramadol
+
+duloxetine
+bupropion, fluoxetine, trazodone, dextroamphetamine, sertraline, cyclobenzaprine, tramadol, citalopram, escitalopram
+
+azithromycin
+citalopram, escitalopram
+
+ranitidine
+none

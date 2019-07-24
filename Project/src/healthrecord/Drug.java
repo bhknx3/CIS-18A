@@ -37,10 +37,11 @@ public class Drug implements DisplayInfo {
     }
 
     public void printInteract() {
-        System.out.println("Major interactions with:");
-        for(int i=0; i<interactions.length; i++) {
-            System.out.print(interactions[i] + " ");
+        System.out.print("Major interactions with: ");
+        for(int i=0; i<interactions.length-1; i++) {
+            System.out.print(interactions[i] + ", ");
         }
+        System.out.println(interactions[interactions.length-1]);
     }
 
     @Override
