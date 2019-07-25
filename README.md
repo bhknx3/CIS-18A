@@ -10,7 +10,7 @@ To provide a simple patient-record managing program intended for healthcare prov
 Benjamin Kwon
 
 ### Version Number
-1.4
+1.5
 
 ### Date of Creation
 Project started July 5, 2019.

@@ -5,27 +5,43 @@ class Person {
     protected String fName; // First name
     protected String lName; // Last name
 
+
     // Constructor
     Person(String f, String l) {
         fName = f;
         lName = l;
     }
 
-    // Access name of person
-    public String getName() {
+    // Access first name only
+    public String getFirstName() {
+        return fName;
+    }
+
+    // Access last name only
+    public String getLastName() {
+        return lName;
+    }
+
+    // Access first and last name of person
+    public String getFullName() {
         return fName + " " + lName;
+    }
+
+    // Access last name and first name (For comparison purposes)
+    String getLastFirstName() {
+        return lName + fName;
     }
 }
 
 // Patient class
-public class Patient extends Person implements DisplayInfo {
+public class Patient extends Person implements DisplayInfo, Comparable<Patient> {
     private Drug[] prescriptions;   // List of prescriptions patient is taking
     private Boolean warning;        // Major interaction between prescriptions
 
     // Constructor: Takes first and last name
     public Patient(String f, String l) {
         super(f, l);
-        prescriptions = new Drug[0];
+        prescriptions = new Drug[0];    // Create empty array
         warning = false;
     }
 
@@ -33,15 +49,15 @@ public class Patient extends Person implements DisplayInfo {
     public Patient(String f, String l, Drug[] arr) {
         super(f, l);
         prescriptions = arr;
-        checkInteraction();
+        checkInteraction(); // Set warning
     }
 
     // Check patient's prescription list for interactions
-    void checkInteraction() {
+    private void checkInteraction() {
         for(int i=0; i<prescriptions.length; i++) {
             for(int j=0; j<prescriptions[i].getInteractionsSize(); j++) {
                 for(int k=0; k<prescriptions.length; k++) {
-                    if( prescriptions[i].getInteraction(j).equals(prescriptions[k].getName()) ) {
+                    if(prescriptions[i].getInteraction(j).equals(prescriptions[k].getName())) {
                         warning = true; // Major interaction found
                         return;
                     }
@@ -71,6 +87,9 @@ public class Patient extends Person implements DisplayInfo {
         }
         newArray[newArray.length-1] = d;    // Add new prescription
         prescriptions = newArray;   // Change reference
+
+        // Check for drug interactions
+        checkInteraction();
     }
 
     // Delete a prescription from array, parameter: array element number
@@ -80,18 +99,21 @@ public class Patient extends Person implements DisplayInfo {
         // Create a new array with 1 element less than original
         Drug newArray[] = new Drug[prescriptions.length-1];
         // Fill first half of new array
-        for (int i=0; i<n; i++) {
+        for(int i=0; i<n; i++) {
             newArray[i] = prescriptions[i];
         }
         // Fill second half of new array
-        for (int i=n; i<newArray.length; i++) {
+        for(int i=n; i<newArray.length; i++) {
             newArray[i] = prescriptions[i+1];
         }
         prescriptions = newArray;   // Change reference
+
+        // Update drug interactions
+        checkInteraction();
     }
 
     // Print list of prescriptions patient is taking
-    void printPrescriptions() {
+    private void printPrescriptions() {
         // If no prescription, output "None"
         if(prescriptions == null || prescriptions.length <= 0) {
             System.out.println("None");
@@ -105,11 +127,7 @@ public class Patient extends Person implements DisplayInfo {
     }
 
     // Print interaction warning
-    void printWarning() {
-        // Check for interactions
-        if(prescriptions != null)
-            checkInteraction();
-
+    private void printWarning() {
         // Output interaction warning if toggled on
         if(warning)
             System.out.println("WARNING - Major interaction detected");
@@ -121,12 +139,18 @@ public class Patient extends Person implements DisplayInfo {
     @Override
     public void showInfo() {
         // Print name
-        System.out.print("Patient name: " + getName() + "\n");
+        System.out.print("Patient name: " + getFullName() + "\n");
         // Print prescriptions
         System.out.print("Prescription: ");
         printPrescriptions();
-        // Warnings
+        // Print warnings
         System.out.print("Interactions: ");
         printWarning();
+    }
+
+    // Sort custom order by last name first, first name second
+    @Override
+    public int compareTo(Patient o) {
+        return this.getLastFirstName().compareTo(o.getLastFirstName());
     }
 }

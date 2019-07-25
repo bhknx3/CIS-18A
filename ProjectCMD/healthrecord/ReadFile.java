@@ -38,8 +38,8 @@ public class ReadFile {
             }
 
             // Read in file contents
-            while ((line = br.readLine()) != null) {
-                if (!line.equals("")) {
+            while((line = br.readLine()) != null) {
+                if(!line.equals("")) {
                     // Get drug name and save
                     line = line.trim();
                     drugs[counter].setName(line);   // Set name of drug

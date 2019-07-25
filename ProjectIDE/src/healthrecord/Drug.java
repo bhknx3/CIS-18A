@@ -11,24 +11,24 @@ public class Drug implements DisplayInfo {
     }
 
     // Set drug name
-    public void setName(String n) {
+    void setName(String n) {
         name = n;
     }
 
     // Set interactions list
-    public void setInteract(String[] a) {
+    void setInteract(String[] a) {
         interactions = a;
     }
 
     // Return a specific interaction drug based on the array element
-    public String getInteraction(int e) {
+    String getInteraction(int e) {
         if(e >= 0 && e < interactions.length)
             return interactions[e];
         return null;
     }
 
     // Get size of interaction array
-    public int getInteractionsSize() {
+    int getInteractionsSize() {
         return interactions.length;
     }
 
@@ -38,7 +38,7 @@ public class Drug implements DisplayInfo {
     }
 
     // Print all drugs in interactions list
-    public void printInteract() {
+    void printInteract() {
         System.out.print("Major interactions with: ");
         for(int i=0; i<interactions.length-1; i++) {
             System.out.print(interactions[i] + ", ");

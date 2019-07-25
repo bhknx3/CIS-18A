@@ -8,7 +8,7 @@
  * This is intended to allow health-care professionals to:
  *      1. Reassess patient medication management
  *      2. Make sure there are no mistakes, prescriptions are as intended
- *      3. Quick management of patients and their history
+ *      3. Quick management of multiple patients
  * The program also has a mini-feature that allows the user to search a drug
  * that the program recognizes. If the searched drug is recognized, a list of
  * other drugs that negatively interact with it will be displayed.
@@ -18,11 +18,12 @@ import healthrecord.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
-class Program implements MenuOption {
+class Program implements MenuOptions {
     private ArrayList<Patient> patients;    // To hold patients
-    private Drug drugs[];                   // Holds information for top 50 drugs
+    private Drug[] drugs;                   // Holds information for top 50 drugs
 
     // Constructor
     Program() {
@@ -33,6 +34,8 @@ class Program implements MenuOption {
         // Create and read in patient data
         patients = new ArrayList<Patient>();
         preLoadInfo();
+        // Sort patient data
+        Collections.sort(patients);
     }
 
     // Run program
@@ -59,11 +62,11 @@ class Program implements MenuOption {
         do {
             input = scan.nextInt();    // Get user input
 
-            if (input < 1 || input > NUM_OPTION) {
+            if(input < 1 || input > NUM_OPTION) {
                 System.out.println("Error: Invalid input.");
                 System.out.print("Enter input: ");
             }
-        } while (input < 1 || input > NUM_OPTION);
+        } while(input < 1 || input > NUM_OPTION);
 
         // Determine the program response to user input
         switch(input) {
@@ -112,6 +115,9 @@ class Program implements MenuOption {
         // Add patient to array list
         patients.add(new Patient(firstName, lastName));
         System.out.println("Patient added.");
+
+        // Sort patient list by last name
+        Collections.sort(patients);
     }
 
     // Edit patient information
@@ -119,10 +125,10 @@ class Program implements MenuOption {
     public void editPatient() {
         // Get patient to edit
         int in = scanPatient();
-        if (in != -1) {
+        if(in != -1) {
             // Mini menu
             System.out.println();
-            System.out.println(patients.get(in-1).getName());
+            System.out.println(patients.get(in-1).getFullName());
             System.out.println("1. Add prescription");
             System.out.println("2. Delete prescription");
             System.out.println("3. Go back to menu");
@@ -160,6 +166,7 @@ class Program implements MenuOption {
                 // Get patient prescriptions
                 Drug arr[] = patients.get(in-1).getPrescription();
 
+                // If no prescriptions are found, cancel
                 if(arr.length <= 0) {
                     System.out.println("No prescriptions found");
                     return;
@@ -167,7 +174,7 @@ class Program implements MenuOption {
 
                 // Output prescription choices to delete
                 System.out.println("\nPrescriptions:");
-                for (int i=0; i<arr.length; i++) {
+                for(int i=0; i<arr.length; i++) {
                     System.out.println((i+1) + ". " + arr[i].getName());
                 }
 
@@ -180,13 +187,12 @@ class Program implements MenuOption {
                     patients.get(in-1).deletePrescription(pInput);
                     System.out.println("Prescription deleted.");
                 } else {
-                    System.out.println("Error: Invalid input");
+                    System.out.println("Error: Invalid input.");
                 }
             } else if(userInput == 3) { // Go back to menu option
-                return;
+                // Nothing required here
             } else {
                 System.out.println("Error: Invalid input.");
-                return;
             }
         }
     }
@@ -195,7 +201,7 @@ class Program implements MenuOption {
     @Override
     public void viewPatient() {
         int in = scanPatient();
-        if (in != -1) {
+        if(in != -1) {
             System.out.println();
             patients.get(in - 1).showInfo();
         }
@@ -206,7 +212,7 @@ class Program implements MenuOption {
     @Override
     public void deletePatient() {
         int in = scanPatient();
-        if (in != -1) {
+        if(in != -1) {
             patients.remove(in - 1);
             System.out.println("Patient record deleted.");
         }
@@ -227,7 +233,7 @@ class Program implements MenuOption {
         // Search for drug name
         for(int i=0; i<drugs.length; i++) {
             drugName = drugs[i].getName();
-            if (drugName.equals(userInput)) {
+            if(drugName.equals(userInput)) {
                 System.out.println();
                 drugs[i].showInfo();
                 return;
@@ -238,14 +244,14 @@ class Program implements MenuOption {
 
     // Output patient data to a text file named patient_data.txt
     @Override
-    public void fileOut(){
+    public void fileOut() {
         try {
             String fn = "patient_data.txt"; // File out name
             BufferedWriter writer = new BufferedWriter(new FileWriter(fn));
 
             for(int i=0; i<patients.size(); i++) {
                 // Get patient's name and prescriptions
-                String name = patients.get(i).getName();
+                String name = patients.get(i).getFullName();
                 Drug drug[] = patients.get(i).getPrescription();
                 Boolean status = patients.get(i).getWarning();
 
@@ -255,7 +261,7 @@ class Program implements MenuOption {
                 // Write prescription data to file
                 writer.write("Prescriptions: ");
                 if(drug.length-1 >= 0) {        // If there are prescriptions
-                    for (int j = 0; j < drug.length - 1; j++) {
+                    for(int j = 0; j < drug.length - 1; j++) {
                         writer.write(drug[j].getName() + ", ");
                     }
                     writer.write(drug[drug.length - 1].getName() + "\n");
@@ -277,26 +283,26 @@ class Program implements MenuOption {
     }
 
     // Scan in user input when searching for a patient
-    int scanPatient() {
+    private int scanPatient() {
         int input;  // To hold user input (patient number)
 
         // Make sure patient array has at least 1 patient
-        if (patients.size() <= 0) {
+        if(patients.size() <= 0) {
             System.out.println("\nNo patients found.");
             input = -1; // Invalid input
         } else {
             // Display patient records
-            System.out.println("\nList of patients:");
-            for (int i = 0; i < patients.size(); i++) {
+            System.out.println("\nList of patients (LastName, FirstName):");
+            for(int i = 0; i < patients.size(); i++) {
                 System.out.print((i + 1) + ". ");
-                System.out.println(patients.get(i).getName());
+                System.out.println(patients.get(i).getLastName() + ", " + patients.get(i).getFirstName());
             }
 
             // Get user input
             Scanner scan = new Scanner(System.in);
             System.out.print("\nEnter number to view patient: ");
             input = scan.nextInt();
-            if (input < 1 || input > patients.size()) { // Validate user input
+            if(input < 1 || input > patients.size()) { // Validate user input
                 System.out.println("Error: Invalid input.");
                 input = -1; // Invalid input
             }
@@ -305,22 +311,22 @@ class Program implements MenuOption {
     }
 
     // Preload some patient information
-    void preLoadInfo() {
+    private void preLoadInfo() {
         // Patient 1
-        Drug arr[] = { drugs[1], drugs[8] };
+        Drug[] arr = { drugs[1], drugs[8] };
         patients.add(new Patient("John", "Doe", arr));
 
         // Patient 2
-        Drug arr2[] = {drugs[0], drugs[1], drugs[2], drugs[3] };
+        Drug[] arr2 = {drugs[0], drugs[1], drugs[2], drugs[3] };
         patients.add(new Patient("Sally", "Shell", arr2));
 
         // Patient 3
-        Drug arr3[] = { drugs[15], drugs[30] };
+        Drug[] arr3 = { drugs[15], drugs[30] };
         patients.add(new Patient("Tommy", "Sand", arr3));
     }
 
     // To prompt user to press a key before displaying the menu again
-    void promptEnterKey(){
+    private void promptEnterKey(){
         System.out.println();
         System.out.print("Press \"ENTER\" to return to menu");
         Scanner scan = new Scanner(System.in);

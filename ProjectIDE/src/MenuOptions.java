@@ -1,4 +1,4 @@
-public interface MenuOption {
+public interface MenuOptions {
     void viewPatient();     // View patient
     void addPatient();      // Add patient
     void editPatient();     // Edit patient
