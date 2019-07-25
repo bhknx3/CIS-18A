@@ -1,24 +1,26 @@
-import healthrecord.Drug;
+package healthrecord;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-class ReadFile {
-    Drug drugs[];
+public class ReadFile {
+    private Drug drugs[];   // Hold drugs
 
-    ReadFile() {
+    // Constructor
+    public ReadFile() {
         readFileContent();
     }
 
-    Drug[] getDrugList() {
+    // Accessor to drug list
+    public Drug[] getDrugList() {
         return drugs;
     }
 
-    // Read in prescription data from data file 'drugs_data.txt'
-    // File contains top 50 drugs and their major interactions with each other
+    // Read in data file 'drugs_data.txt' containing drug information
+    // File contains top 50 drugs used and their major interactions with each other
     void readFileContent() {
-        // Read in file containing drug information ( name + interaction list )
         try {
             String file = "drugs_data.txt";
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -53,15 +55,6 @@ class ReadFile {
                     counter++;  // Go to next object in drug array
                 }
             }
-
-            /* Test output
-            for (int i = 0; i < drugs.length; i++) {
-                drugs[i].printName();
-                drugs[i].printInteract();
-                System.out.println();
-                System.out.println();
-            }
-            */
         } catch(Exception e) {
             System.out.println(e);
         }

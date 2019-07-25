@@ -61,6 +61,7 @@ class Program implements MenuOption {
 
             if (input < 1 || input > NUM_OPTION) {
                 System.out.println("Error: Invalid input.");
+                System.out.print("Enter input: ");
             }
         } while (input < 1 || input > NUM_OPTION);
 
@@ -128,7 +129,7 @@ class Program implements MenuOption {
             System.out.print("Enter input: ");
 
             Scanner scan = new Scanner(System.in);  // To read user input
-            int userInput = scan.nextInt();    // Get user input
+            int userInput = scan.nextInt();         // Get user input
 
             // Add prescription menu
             if(userInput == 1) {
@@ -165,13 +166,13 @@ class Program implements MenuOption {
                 }
 
                 // Output prescription choices to delete
-                System.out.println("Prescriptions:");
+                System.out.println("\nPrescriptions:");
                 for (int i=0; i<arr.length; i++) {
                     System.out.println((i+1) + ". " + arr[i].getName());
                 }
 
                 // Get user input
-                System.out.print("Enter input: ");
+                System.out.print("Enter number to delete: ");
                 int pInput = scan.nextInt();
 
                 // Validate input and delete if valid
@@ -239,8 +240,9 @@ class Program implements MenuOption {
     @Override
     public void fileOut(){
         try {
-            String fn = "patient_data.txt";
+            String fn = "patient_data.txt"; // File out name
             BufferedWriter writer = new BufferedWriter(new FileWriter(fn));
+
             for(int i=0; i<patients.size(); i++) {
                 // Get patient's name and prescriptions
                 String name = patients.get(i).getName();
@@ -258,7 +260,7 @@ class Program implements MenuOption {
                     }
                     writer.write(drug[drug.length - 1].getName() + "\n");
                 } else {
-                    writer.write("None\n");   // If no prescriptions found
+                    writer.write("None\n"); // If no prescriptions found
                 }
 
                 // Write warning to file
@@ -267,7 +269,7 @@ class Program implements MenuOption {
                 else
                     writer.write("No interactions detected.\n\n");
             }
-            writer.close(); // Close file
+            writer.close();
             System.out.println("Data successfully written to " + fn);
         } catch(Exception e) {
             System.out.println(e);

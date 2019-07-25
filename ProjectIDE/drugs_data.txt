@@ -96,7 +96,7 @@ bupropion
 tamsulosin
 none
 
-potassium chloride
+potassium
 lisinopril, cyclobenzaprine, losartan
 
 clopidogrel
@@ -114,7 +114,7 @@ none
 aspirin
 ibuprofen, warfarin
 
-Tramadol Hydrochloride ER (tramadol)
+tramadol
 alprazolam, bupropion, clonazepam, fluoxetine, trazodone, dextroamphetamine, sertraline, methylphenidate, zolpidem, cyclobenzaprine, hydrocodone, citalopram, escitalopram, duloxetine
 
 zolpidem
